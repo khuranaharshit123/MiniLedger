@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Environment files (contains secrets)
+.env
+
+# Build output
+dist/
+
+# Uploaded files
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+uploads/*.gif
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Expo
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/

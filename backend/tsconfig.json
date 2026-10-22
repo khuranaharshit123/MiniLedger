@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* What version of JavaScript to output */
+    "target": "ES2020",
+
+    /* Use CommonJS modules (works with Node.js) */
+    "module": "commonjs",
+
+    /* Where to put the compiled JavaScript files */
+    "outDir": "./dist",
+
+    /* Where our TypeScript source files live */
+    "rootDir": "./src",
+
+    /* Enable strict type checking for fewer bugs */
+    "strict": true,
+
+    /* Allow importing JSON files */
+    "resolveJsonModule": true,
+
+    /* Makes imports work nicely between CommonJS and ES modules */
+    "esModuleInterop": true,
+
+    /* Skip type checking of library files for faster builds */
+    "skipLibCheck": true,
+
+    /* Ensures file name casing is consistent */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
