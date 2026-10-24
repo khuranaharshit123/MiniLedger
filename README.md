@@ -62,16 +62,15 @@ Make sure you have these installed:
 
 ---
 
-### Step 1: Set Up the Database
+### Step 1: Set Up PostgreSQL
 
-1. Open your PostgreSQL client (pgAdmin or terminal)
-2. Create a new database:
+Install PostgreSQL 14 or later and make sure its service is running. Create a database named `miniledger` in pgAdmin or with `psql`:
 
 ```sql
 CREATE DATABASE miniledger;
 ```
 
-That's it! The tables will be created automatically when the server starts.
+The backend creates its tables automatically when it starts.
 
 ---
 
@@ -84,12 +83,13 @@ cd backend
 # Install dependencies
 npm install
 
-# Create your environment file
-cp .env.example .env
+# Create your environment file only if one does not exist
+# PowerShell: if (!(Test-Path .env)) { Copy-Item .env.example .env }
+# macOS/Linux: cp -n .env.example .env
 
-# Edit .env and set your PostgreSQL connection string:
+# In .env, set your PostgreSQL username/password and replace JWT_SECRET:
 # DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/miniledger
-# JWT_SECRET=any_random_string_here
+# JWT_SECRET=choose_a_long_random_secret
 
 # Start the development server
 npm run dev
@@ -119,9 +119,7 @@ Then:
 - Or press `a` to open in Android emulator
 - Or press `w` to open in web browser
 
-> ⚠️ **Important:** If using a physical device, update the API base URL in  
-> `mobile/src/api/api.ts` to your computer's local IP address  
-> (e.g., `http://192.168.1.100:5000` instead of `http://10.0.2.2:5000`)
+> **Physical device:** Connect the phone and computer to the same Wi-Fi network, then start Expo in LAN mode with `npx expo start --lan -c`. The app uses Expo's LAN address to reach the backend. If needed, override it by setting `EXPO_PUBLIC_API_URL` to `http://YOUR_COMPUTER_IP:5000` (for example, `http://192.168.1.100:5000`) before starting Expo. Allow port 5000 through the computer's firewall. Android emulators use `10.0.2.2` by default; web uses `localhost`.
 
 ---
 
@@ -216,3 +214,4 @@ This runs the input validation tests using Jest.
 ## 📝 License
 
 This project is for educational purposes.
+

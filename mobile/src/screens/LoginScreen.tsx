@@ -145,6 +145,7 @@ export default function LoginScreen() {
           <TextInput
             style={styles.input}
             placeholder="e.g. 9876543210"
+            placeholderTextColor="#BDBDBD"
             keyboardType="phone-pad"
             value={phone}
             onChangeText={setPhone}
@@ -172,6 +173,7 @@ export default function LoginScreen() {
           <TextInput
             style={styles.input}
             placeholder="Enter OTP"
+            placeholderTextColor="#BDBDBD"
             keyboardType="number-pad"
             value={otp}
             onChangeText={setOtp}
@@ -253,6 +255,7 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#FFFFFF",
+    color: "#000000",
     borderWidth: 1,
     borderColor: "#DDD",
     borderRadius: 8,
@@ -294,3 +297,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
+

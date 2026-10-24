@@ -149,6 +149,7 @@ export default function AddLoanScreen({ navigation }: any) {
           <TextInput
             style={styles.input}
             placeholder="e.g. Rahul"
+            placeholderTextColor="#BDBDBD"
             value={friendName}
             onChangeText={setFriendName}
             maxLength={100}
@@ -161,6 +162,7 @@ export default function AddLoanScreen({ navigation }: any) {
           <TextInput
             style={styles.input}
             placeholder="e.g. 500"
+            placeholderTextColor="#BDBDBD"
             keyboardType="numeric"
             value={amount}
             onChangeText={setAmount}
@@ -173,6 +175,7 @@ export default function AddLoanScreen({ navigation }: any) {
           <TextInput
             style={styles.input}
             placeholder="YYYY-MM-DD (e.g. 2025-12-01)"
+            placeholderTextColor="#BDBDBD"
             value={dueDate}
             onChangeText={setDueDate}
             maxLength={10}
@@ -300,3 +303,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
+

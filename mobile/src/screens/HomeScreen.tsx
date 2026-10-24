@@ -23,6 +23,7 @@ import {
   RefreshControl,
   Alert,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 
 // Import image picker for receipt photos
@@ -128,7 +129,30 @@ export default function HomeScreen({ navigation }: any) {
    * handleRepay() — Mark a loan as repaid
    */
   async function handleRepay(loanId: string) {
-    // Ask for confirmation first
+    const confirmRepayment = async () => {
+      try {
+        await markRepaid(token!, loanId);
+        await fetchData();
+      } catch (error: any) {
+        const message =
+          error.response?.data?.error ||
+          "Failed to mark as repaid. Please check that the backend is running and try again.";
+        if (Platform.OS === "web") {
+          window.alert(message);
+        } else {
+          Alert.alert("Error", message);
+        }
+      }
+    };
+
+    // React Native's Alert buttons aren't implemented by the web renderer.
+    if (Platform.OS === "web") {
+      if (window.confirm("Are you sure this loan has been repaid?")) {
+        await confirmRepayment();
+      }
+      return;
+    }
+
     Alert.alert(
       "Mark as Repaid?",
       "Are you sure this loan has been repaid?",
@@ -136,15 +160,7 @@ export default function HomeScreen({ navigation }: any) {
         { text: "Cancel", style: "cancel" },
         {
           text: "Yes, Repaid",
-          onPress: async () => {
-            try {
-              await markRepaid(token!, loanId);
-              // Refresh the list to show updated status
-              fetchData();
-            } catch (error) {
-              Alert.alert("Error", "Failed to mark as repaid. Please try again.");
-            }
-          },
+          onPress: () => void confirmRepayment(),
         },
       ]
     );
@@ -180,6 +196,14 @@ export default function HomeScreen({ navigation }: any) {
    * handleLogout() — Log out the user
    */
   function handleLogout() {
+    // React Native Alert buttons aren't implemented by the web renderer.
+    if (Platform.OS === "web") {
+      if (window.confirm("Are you sure you want to log out?")) {
+        void logout();
+      }
+      return;
+    }
+
     Alert.alert(
       "Logout",
       "Are you sure you want to log out?",
@@ -355,3 +379,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+

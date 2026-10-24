@@ -25,6 +25,7 @@ import cors from "cors";
 
 // Import path — helps us work with file/directory paths
 import path from "path";
+import fs from "fs";
 
 // Step 3: Import our database initialization function
 import { initDB } from "./db";
@@ -51,7 +52,9 @@ app.use(express.json());
 
 // Serve uploaded files (receipt photos) as static files
 // This means a file at uploads/photo.jpg can be accessed at http://localhost:5000/uploads/photo.jpg
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+const uploadsDir = path.join(__dirname, "../uploads");
+fs.mkdirSync(uploadsDir, { recursive: true });
+app.use("/uploads", express.static(uploadsDir));
 
 // ============ ROUTES SETUP ============
 
@@ -98,3 +101,4 @@ initDB()
 
 // Export the app for testing purposes
 export default app;
+

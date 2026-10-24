@@ -85,3 +85,4 @@ export function validateLoanInput(
   // All checks passed — loan input is valid
   return null;
 }
+

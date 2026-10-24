@@ -88,3 +88,4 @@ describe("validateLoanInput", () => {
     expect(result).toBeNull(); // null means "no error — everything is valid"
   });
 });
+

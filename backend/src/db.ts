@@ -84,3 +84,4 @@ export async function initDB(): Promise<void> {
 
 // Export the pool so other files can use it to query the database
 export default pool;
+

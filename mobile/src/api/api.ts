@@ -11,19 +11,28 @@
 
 // Import axios to make HTTP requests
 import axios from "axios";
+import { Platform } from "react-native";
+import Constants from "expo-constants";
 
 /*
  * Create an axios "instance" with a base URL.
- * All requests made with this instance will automatically
- * prepend this URL. So api.get("/loans") becomes GET http://10.0.2.2:5000/loans
+ * All requests made with this instance will automatically prepend this URL.
  *
  * 🔧 IMPORTANT:
  * - "10.0.2.2" is a special IP that Android emulator uses to reach localhost
- * - If you're using a physical phone, change this to your computer's IP
- *   (e.g., "http://192.168.1.100:5000")
- * - You can find your IP by running "ipconfig" (Windows) or "ifconfig" (Mac/Linux)
+ * - A physical phone uses the Expo dev server's LAN host when running in LAN mode.
+ * - EXPO_PUBLIC_API_URL can override the automatic host selection.
  */
-const API_BASE_URL = "http://10.0.2.2:5000";
+// Set EXPO_PUBLIC_API_URL when running on a physical device or a different host.
+// Android emulators use 10.0.2.2 to reach the host computer; iOS simulators and
+// web browsers can use localhost.
+const expoHost = Constants.expoConfig?.hostUri?.split(":")[0];
+const defaultApiHost = expoHost
+  ? `http://${expoHost}:5000`
+  : Platform.OS === "android"
+    ? "http://10.0.2.2:5000"
+    : "http://localhost:5000";
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || defaultApiHost;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -145,3 +154,4 @@ export async function uploadReceipt(
   });
   return response.data;
 }
+

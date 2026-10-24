@@ -8,7 +8,6 @@
  * How the login flow works:
  * - User enters their phone number
  * - Server generates a random 6-digit OTP and prints it in the console
- *   (In a real app, this would send an SMS)
  * - User enters the OTP
  * - Server checks if the OTP matches, then gives the user a JWT token
  */
@@ -157,3 +156,4 @@ router.post("/verify-otp", async (req: Request, res: Response): Promise<void> =>
 
 // Export the router so index.ts can use it
 export default router;
+

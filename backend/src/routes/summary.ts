@@ -71,3 +71,4 @@ router.get("/", authMiddleware, async (req: Request, res: Response): Promise<voi
 
 // Export the router
 export default router;
+
