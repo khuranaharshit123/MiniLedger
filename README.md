@@ -211,7 +211,5 @@ This runs the input validation tests using Jest.
 
 ---
 
-## 📝 License
 
-This project is for educational purposes.
 
